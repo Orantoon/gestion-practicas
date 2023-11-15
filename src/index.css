@@ -1,13 +1,551 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* Base */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Quicksand";
+  color: #333;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.boton-volver {
+  float: left;
+  position: absolute;
+  transform: translateY(100%);
+  margin-left: 40px;
+}
+
+/* Login */
+.login h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+  text-align: center;
+  margin: 100px auto;
+  padding: 20px;
+}
+.login p {
+  margin-bottom: 40px;
+  text-align: center;
+}
+.login label {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.login select {
+  margin-left: 10px;
+}
+.login input {
+  margin-left: 10px;
+}
+
+
+/* Navbar */
+.navbar {
+  padding: 20px;
+  display: flex;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+}
+.navbar h1 {
+  color: #f1356d;
+  margin-left: 30px;
+}
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+.navbar a:hover {
+  color: #f1356d;
+}
+.boton-logout {
+  float: right;
+  margin-left: 30px;
+}
+
+/* Contenido en App */
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Homepage */
+.home h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.home p {
+  margin-bottom: 40px;
+}
+.home img {
+  border-radius: 8px;
+  width: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+}
+.home {
+  text-align: center;
+}
+
+/* Searchbar */
+.searchbar{
+  padding: 10px 16px;
+}
+
+/* Lista Practicas */
+.practica-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  border: 1px solid black;
+}
+.practica-preview:hover {
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
+  /*background-color: #e6e6e6;*/
+}
+.practica-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+.practica-list-boton {
+  float: right;
+  transform: translateY(-300%);
+  padding-right: 10px;
+}
+.boton-crear-practica{
+  float: right;
+  transform: translateY(-140%);
+  padding-right: 20px;
+}
+
+/* Info Practica */
+.info-practica-con h1 {
+  color: #f1356d;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.info-practica-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.info-practica-con h3 {
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.info-practica-con p {
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+.info-practica-con {
+  display: block;
+  padding: 40px;
+  margin: 10px;
+  text-align: center;
+}
+
+/* Crear Practica */
+.crear-practica-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+  text-align: center;
+  margin: 10px auto;
+  padding: 20px;
+}
+.crear-practica-con label {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.crear-practica-con select {
+  margin-left: 10px;
+}
+.crear-practica-con input {
+  margin-left: 10px;
+}
+
+
+/* Edit Practica */
+.edit-practica-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.edit-practica-con p {
+  margin-bottom: 10px; 
+}
+.edit-practica-con select {
+  margin-left: 10px;
+}
+.edit-practica-con input {
+  margin-left: 10px;
+}
+.edit-practica-con label {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.edit-practica-con p {
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+}
+.edit-practica-con {
+  display: block;
+  padding: 40px;
+  margin: 10px;
+}
+
+/* Agregar Informe a Practica */
+.agregar-informe h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.agregar-informe p {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.agregar-informe input {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.agregar-informe button {
+  margin-left: 20px;
+}
+.agregar-informe {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Lista de Informes */
+.informe-list {
+  float: left;
+  margin-bottom: 100px;
+}
+.informe-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  border: 1px solid black;
+}
+.informe-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+
+/* Info Informe */
+.info-informe h1 {
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.info-informe-texto {
+  margin-bottom: 40px;
+  text-align: center;
+  padding: 20px;
+}
+.info-informe-detalles {
+  padding: 20px;
+}
+.info-informe-detalles p {
+  margin-bottom: 20px;
+}
+.info-informe-botones {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+/* Agregar Bitacora a Practica */
+.agregar-bitacora h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.agregar-bitacora p {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.agregar-bitacora input {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.agregar-bitacora button {
+  margin-left: 20px;
+}
+.agregar-bitacora {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Lista de Bitacoras */
+.bitacora-list {
+  float: right;
+}
+.bitacora-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  border: 1px solid black;
+}
+.bitacora-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+
+/* Info Bitacora */
+.info-bitacora h1 {
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.info-bitacora-texto {
+  margin-bottom: 40px;
+  text-align: center;
+  padding: 20px;
+}
+.info-bitacora-detalles {
+  padding: 20px;
+}
+.info-bitacora-detalles p {
+  margin-bottom: 20px;
+}
+.info-bitacora-botones {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+/* Comentarios */
+.comentarios h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+.comentarios-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  border: 1px solid black;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.comentarios-autor {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.comentarios-texto {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+.comentarios-posttime {
+  font-size: 15px;
+}
+.comentarios-botones {
+  margin-left: 40px;
+}
+.comentarios-nohay {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+
+/* Comentar Informe */
+.comentar-informe h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.comentar-informe p {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.comentar-informe input {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.comentar-informe button {
+  margin-left: 20px;
+}
+.comentar-informe {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Calificar Informe */
+.calificar-informe-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 60px;
+  padding: 20px;
+}
+.calificar-informe-con p {
+  margin-bottom: 40px;
+}
+.calificar-informe-con input {
+  margin-bottom: 40px;
+}
+.calificar-informe-con {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Comentar Bitacora */
+.comentar-bitacora h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+}
+.comentar-bitacora p {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.comentar-bitacora input {
+  margin-left: 20px;
+  margin-bottom: 40px;
+}
+.comentar-bitacora button {
+  margin-left: 20px;
+}
+.comentar-bitacora {
+  display: block;
+  margin-bottom: 20px;
+  padding: 2
+}
+
+/* Calificar Bitacora */
+.calificar-bitacora-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 60px;
+  padding: 20px;
+}
+.calificar-bitacora-con p {
+  margin-bottom: 40px;
+}
+.calificar-bitacora-con input {
+  margin-bottom: 40px;
+}
+.calificar-bitacora-con {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Crear Usuario */
+.crear-usuario-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+  text-align: center;
+  margin: 10px auto;
+  padding: 20px;
+}
+.crear-usuario-con label {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.crear-usuario-con select {
+  margin-left: 10px;
+}
+.crear-usuario-con input {
+  margin-left: 10px;
+}
+
+/* Lista Usuarios */
+.usuario-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+  border: 1px solid black;
+}
+.usuario-preview:hover {
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.1);
+  /*background-color: #e6e6e6;*/
+}
+.usuario-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+.usuario-list-boton {
+  float: right;
+  transform: translateY(-200%);
+}
+.boton-crear-usuario{
+  float: right;
+  transform: translateY(-140%);
+  padding-right: 20px;
+}
+
+/* Edit Usuario */
+.editar-usuario-con h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.editar-usuario-con p {
+  margin-bottom: 10px; 
+}
+.editar-usuario-con select {
+  margin-left: 10px;
+}
+.editar-usuario-con input {
+  margin-left: 10px;
+}
+.editar-usuario-con label {
+  display: block;
+  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.editar-usuario-con p {
+  display: block;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+}
+.editar-usuario-con {
+  display: block;
+  padding: 40px;
+  margin: 10px;
 }
