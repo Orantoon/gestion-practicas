@@ -8,6 +8,7 @@ const BitacoraList = ({practica, bitacoras, usuarioActual, handleBitacora}) => {
         navigate('/infobitacora/' + id);
     }
     
+    const bitacorasPractica = bitacoras.filter(bitacora => bitacora.practica === practica.id);
     const [bitacoraActual, setBitacoraActual] = useState(0);
 
     const mostrarSiguienteBitacora = () => {
@@ -26,20 +27,20 @@ const BitacoraList = ({practica, bitacoras, usuarioActual, handleBitacora}) => {
         <div className="bitacora-list">
             <h2>Bitácoras</h2>
             <div className="bitacora-list-boton">
-                {usuarioActual.tipo === 'Estudiante' && practica.status === 'activo' && <button onClick={() => handleBitacora(practica.id)}>Agregar Bitácora</button>}
+                {usuarioActual.tipo === 1 && practica.status === 'activo' && <button onClick={() => handleBitacora(practica.id)}>Agregar Bitácora</button>}
             </div>
 
-            {bitacoras.length > 0 ? (
-            <div className="bitacora-preview" key={bitacoras[bitacoraActual].id}>
-                <h3>{bitacoras[bitacoraActual].titulo}</h3>
-                <p>Fecha de carga: {bitacoras[bitacoraActual].posttime}</p>
+            {bitacorasPractica.length > 0 ? (
+            <div className="bitacora-preview" key={bitacorasPractica[bitacoraActual].id}>
+                <h3>{bitacorasPractica[bitacoraActual].titulo}</h3>
+                <p>Fecha de carga: {bitacorasPractica[bitacoraActual].posttime}</p>
                 <p>
                 Calificación del profesor: {' '}
-                {bitacoras[bitacoraActual].calificacionProfesor !== null
-                    ? bitacoras[bitacoraActual].calificacionProfesor
+                {bitacorasPractica[bitacoraActual].calificacionProfesor !== null
+                    ? bitacorasPractica[bitacoraActual].calificacionProfesor
                     : 'No Calificado'}
                 </p>
-                <button onClick={() => handleView(bitacoras[bitacoraActual].id)}>Visualizar</button>
+                <button onClick={() => handleView(bitacorasPractica[bitacoraActual].id)}>Visualizar</button>
             </div>
             ) : (
                 <p>No hay bitacoras.</p>

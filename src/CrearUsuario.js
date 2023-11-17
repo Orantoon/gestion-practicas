@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 const CrearUsuario = () => {
     const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
+    let navigate = useNavigate();
+
     const [inputs, setInputs] = useState({});
     const handleChange = (event) => {
         const name = event.target.name;
@@ -19,10 +21,9 @@ const CrearUsuario = () => {
         //alert(inputs.nombre);
         //alert(inputs.apellido);
         //alert(inputs.final);
+        navigate('/usuarios');
     }
 
-
-    let navigate = useNavigate();
     const handleBack = () => {
         navigate('/usuarios');
     };

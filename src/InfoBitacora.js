@@ -2,14 +2,11 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Comentarios from './Comentarios';
 
-const InfoBitacora = ({practicas, usuarios, usuarioActual}) => {
+const InfoBitacora = ({practicas, bitacoras, comentariosBitacora, usuarios, usuarioActual, profesores, empresas}) => {
 
     const {id} = useParams();
     const idNum = parseInt(id, 10);
-    const bitacora = practicas
-        .map(practica => practica.bitacoras)
-        .flat()
-        .find(bitacora => bitacora.id === idNum);
+    const bitacora = bitacoras.find(bitacora => bitacora.id === idNum);
     const practica = practicas.find(practica => practica.id === bitacora.practica);
 
     let navigate = useNavigate();
@@ -42,7 +39,7 @@ const InfoBitacora = ({practicas, usuarios, usuarioActual}) => {
                 {(usuarioActual.tipo === 'Profesor' && usuarioActual.id === practica.profesor) && <button onClick={() => handleComentar()}>Comentar</button>}
             </div>
             <div className="info-bitacora-comentarios">
-                <Comentarios usuarios={usuarios} comentarios={bitacora.comentarios}/>
+                <Comentarios usuarios={usuarios} profesores={profesores} empresas={empresas} comentarios={comentariosBitacora}/>
             </div>
         </div>
     );

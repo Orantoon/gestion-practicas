@@ -2,14 +2,11 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Comentarios from './Comentarios';
 
-const InfoInforme = ({practicas, usuarios, usuarioActual}) => {
+const InfoInforme = ({practicas, informes, comentariosInforme, usuarios, usuarioActual, profesores, empresas}) => {
 
     const {id} = useParams();
     const idNum = parseInt(id, 10);
-    const informe = practicas
-        .map(practica => practica.informes)
-        .flat()
-        .find(informe => informe.id === idNum);
+    const informe = informes.find(informe => informe.id === idNum);
     const practica = practicas.find(practica => practica.id === informe.practica);
 
     let navigate = useNavigate();
@@ -40,11 +37,11 @@ const InfoInforme = ({practicas, usuarios, usuarioActual}) => {
                 <p>Calificación total: {informe.calificacionTotal !== null ? informe.calificacionTotal : 'Faltan Calificaciones'}</p>
             </div>
             <div className="info-informe-botones">
-                {((usuarioActual.tipo === 'Profesor' && usuarioActual.id === practica.profesor) || (usuarioActual.tipo === 'Empresa' && usuarioActual.id === practica.empresa)) && <button onClick={() => handleCalificar()}>Calificar</button>}
-                {((usuarioActual.tipo === 'Profesor' && usuarioActual.id === practica.profesor) || (usuarioActual.tipo === 'Empresa' && usuarioActual.id === practica.empresa)) && <button onClick={() => handleComentar()}>Comentar</button>}
+                {((usuarioActual.tipo === 2 && usuarioActual.id === practica.profesor) || (usuarioActual.tipo === 3 && usuarioActual.id === practica.empresa)) && <button onClick={() => handleCalificar()}>Calificar</button>}
+                {((usuarioActual.tipo === 2 && usuarioActual.id === practica.profesor) || (usuarioActual.tipo === 3 && usuarioActual.id === practica.empresa)) && <button onClick={() => handleComentar()}>Comentar</button>}
             </div>
             <div className="info-informe-comentarios">
-                <Comentarios usuarios={usuarios} comentarios={informe.comentarios}/>
+                <Comentarios usuarios={usuarios} profesores={profesores} empresas={empresas} comentarios={comentariosInforme}/>
             </div>
         </div>
     );

@@ -2,13 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const EditUsuario = ({usuarios}) => {
+const EditUsuario = ({tiposUsuario, usuarios, estudiantes, profesores, empresas}) => {
     
     const {id} = useParams();
     const idNum = parseInt(id, 10);
     const usuario = usuarios.find(usuario => usuario.id === idNum);
     
-    
+    let navigate = useNavigate();
+
     const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
     const [inputs, setInputs] = useState({});
@@ -26,10 +27,10 @@ const EditUsuario = ({usuarios}) => {
         //alert(inputs.nombre);
         //alert(inputs.apellido);
         //alert(inputs.final);
+        navigate('/usuarios');
     }
 
     
-    let navigate = useNavigate();
     const handleBack = () => {
         navigate('/usuarios');
     };
@@ -40,14 +41,32 @@ const EditUsuario = ({usuarios}) => {
             <div className="editar-usuario-con">
                 <h2>Editar Usuario</h2>
                 <form onSubmit={handleSubmit}>
-                    <p>Tipo de usuario actual: {usuario.tipo}</p>
+                    <p>Tipo de usuario actual: {tiposUsuario.find(tipo => tipo.id === usuario.tipo).nombre}</p>
                     <p>Correo del usuario actual: {usuario.correo}</p>
-                    {(usuario.tipo === 'Estudiante' || usuario.tipo === 'Profesor' || usuario.tipo === 'Empresa') && <p>Nombre del usuario actual: {usuario.nombre}</p>}
-                    {(usuario.tipo === 'Estudiante' || usuario.tipo === 'Profesor') &&  <p>Apellido del usuario actual: {usuario.apellido}</p>}
-                    {usuario.tipo === 'Estudiante' && <p>Carnet del usuario actual: {usuario.carnet}</p>}
-                    {usuario.tipo === 'Estudiante' && <p>Carrera del usuario actual: {usuario.correo}</p>}
-                    {usuario.tipo === 'Profesor' && <p>Escuela del usuario actual: {usuario.escuela}</p>}
-                    {usuario.tipo === 'Empresa' && <p>Telefono del usuario actual: {usuario.telefono}</p>}
+
+                    {estudiantes.find(estudiante => estudiante.id === usuario.id) && (
+                    <div>
+                        <p>Nombre del estudiante actual: {estudiantes.find(estudiante => estudiante.id === usuario.id).nombre}</p>
+                        <p>Apellido del estudiante actual: {estudiantes.find(estudiante => estudiante.id === usuario.id).apellido}</p>
+                        <p>Carnet del estudiante actual: {estudiantes.find(estudiante => estudiante.id === usuario.id).carnet}</p>
+                        <p>Carrera del estudiante actual: {estudiantes.find(estudiante => estudiante.id === usuario.id).carrera}</p>
+                    </div>
+                    )}
+        
+                    {profesores.find(profesor => profesor.id === usuario.id) && (
+                    <div>
+                        <p>Nombre del profesor actual: {profesores.find(profesor => profesor.id === usuario.id).nombre}</p>
+                        <p>Apellido del profesor actual: {profesores.find(profesor => profesor.id === usuario.id).apellido}</p>
+                        <p>Escuela del profesor actual: {profesores.find(profesor => profesor.id === usuario.id).escuela}</p>
+                    </div>
+                    )}
+        
+                    {empresas.find(empresa => empresa.id === usuario.id) && (
+                    <div>
+                        <p>Nombre de la empresa actual: {empresas.find(empresa => empresa.id === usuario.id).nombre}</p>
+                        <p>Teléfono de la empresa actual: {empresas.find(empresa => empresa.id === usuario.id).telefono}</p>
+                    </div>
+                    )}
 
                     <label> Nuevo tipo de usuario:
                         <select name="tipo" value={inputs.tipo} onChange={handleChange}>

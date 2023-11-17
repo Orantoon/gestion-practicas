@@ -8,6 +8,7 @@ const InformeList = ({practica, informes, usuarioActual, handleInforme}) => {
         navigate('/infoinforme/' + id);
     }
 
+    const informesPractica = informes.filter(informe => informe.practica === practica.id);
     const [informeActual, setInformeActual] = useState(0);
 
     const mostrarSiguiente = () => {
@@ -26,32 +27,32 @@ const InformeList = ({practica, informes, usuarioActual, handleInforme}) => {
         <div className="informe-list" >
             <h2>Informes</h2>
             <div className="informe-list-boton">
-                {usuarioActual.tipo === 'Estudiante' && practica.status === 'activo' && <button onClick={() => handleInforme(practica.id)}>Agregar Informe</button>}
+                {usuarioActual.tipo === 1 && practica.status === 'activo' && <button onClick={() => handleInforme(practica.id)}>Agregar Informe</button>}
             </div>
 
-            {informes.length > 0 ? (
-            <div className="informe-preview" key={informes[informeActual].id}>
-                <h3>{informes[informeActual].titulo}</h3>
-                <p>Fecha de carga: {informes[informeActual].posttime}</p>
+            {informesPractica.length > 0 ? (
+            <div className="informe-preview" key={informesPractica[informeActual].id}>
+                <h3>{informesPractica[informeActual].titulo}</h3>
+                <p>Fecha de carga: {informesPractica[informeActual].posttime}</p>
                 <p>
                 Calificación del profesor: {' '}
-                {informes[informeActual].calificacionProfesor !== null
-                    ? informes[informeActual].calificacionProfesor
+                {informesPractica[informeActual].calificacionProfesor !== null
+                    ? informesPractica[informeActual].calificacionProfesor
                     : 'No Calificado'}
                 </p>
                 <p>
                 Calificación de la empresa: {' '}
-                {informes[informeActual].calificacionEmpresa !== null
-                    ? informes[informeActual].calificacionEmpresa
+                {informesPractica[informeActual].calificacionEmpresa !== null
+                    ? informesPractica[informeActual].calificacionEmpresa
                     : 'No Calificado'}
                 </p>
                 <p>
                 Calificación total: {' '}
-                {informes[informeActual].calificacionTotal !== null
-                    ? informes[informeActual].calificacionTotal
+                {informesPractica[informeActual].calificacionTotal !== null
+                    ? informesPractica[informeActual].calificacionTotal
                     : 'Faltan Calificaciones'}
                 </p>
-                <button onClick={() => handleView(informes[informeActual].id)}>Visualizar</button>
+                <button onClick={() => handleView(informesPractica[informeActual].id)}>Visualizar</button>
             </div>
             ) : (
                 <p>No hay informes.</p>

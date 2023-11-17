@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import PracticaList from "./PracticaList";
 import Searchbar from "./Searchbar";
 
-const Practicas = ({usuarioActual, usuarios, practicas, setPracticas}) => {
+const Practicas = ({usuarioActual, usuarios, estudiantes, profesores, empresas, practicas, setPracticas}) => {
     let navigate = useNavigate();
 
     const handleCreate = () => {
@@ -35,9 +35,9 @@ const Practicas = ({usuarioActual, usuarios, practicas, setPracticas}) => {
         <div className="practicas">
             <Searchbar keyword={keyword} onChange={updateKeyword}/>
             <div className="boton-crear-practica">
-                {(usuarioActual.tipo === 'Admin' || usuarioActual.tipo === 'Profesor') && <button onClick={() => handleCreate()}>Nueva Práctica</button>}
+                {(usuarioActual.tipo === 4) && <button onClick={() => handleCreate()}>Nueva Práctica</button>}
             </div>
-            <PracticaList usuarioActual={usuarioActual} usuarios={usuarios} practicas={practicas.filter((practica) => practica.nombre.includes(keyword))} handleView={handleView} handleEdit={handleEdit} handleDelete={handleDelete} />
+            <PracticaList usuarioActual={usuarioActual} usuarios={usuarios} estudiantes={estudiantes} profesores={profesores} empresas={empresas} practicas={practicas.filter((practica) => practica.nombre.includes(keyword))} handleView={handleView} handleEdit={handleEdit} handleDelete={handleDelete} />
         </div>
     );
 }

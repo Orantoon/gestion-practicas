@@ -2,15 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const EditPractica = ({usuarios, practicas}) => {
+const EditPractica = ({estudiantes, profesores, empresas, practicas}) => {
+    const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
     const {id} = useParams();
     const idNum = parseInt(id, 10);
     const practica = practicas.find(practica => practica.id === idNum);
 
-
-    const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
-
+    let navigate = useNavigate();
     const [inputs, setInputs] = useState({});
     const handleChange = (event) => {
         const name = event.target.name;
@@ -26,10 +25,10 @@ const EditPractica = ({usuarios, practicas}) => {
         //alert(inputs.empresa);
         //alert(inputs.inicio);
         //alert(inputs.final);
+        navigate('/practicas/');
     }
 
 
-    const estudiantes = usuarios.filter((usuario) => usuario.tipo === 'Estudiante')
     const selectEstudiantes = () => {
         let items = [];
         items.push(<option value=''>---</option>)
@@ -39,7 +38,6 @@ const EditPractica = ({usuarios, practicas}) => {
         return items;
     }
 
-    const profesores = usuarios.filter((usuario) => usuario.tipo === 'Profesor')
     const selectProfesores = () => {
         let items = [];
         items.push(<option value=''>---</option>)
@@ -49,7 +47,6 @@ const EditPractica = ({usuarios, practicas}) => {
         return items;
     }
 
-    const empresas = usuarios.filter((usuario) => usuario.tipo === 'Empresa')
     const selectEmpresa = () => {
         let items = [];
         items.push(<option value=''>---</option>)
@@ -62,7 +59,6 @@ const EditPractica = ({usuarios, practicas}) => {
     const dateInputRef = useRef(null);
 
 
-    let navigate = useNavigate();
     const handleBack = () => {
         navigate('/practicas');
     };
@@ -72,10 +68,10 @@ const EditPractica = ({usuarios, practicas}) => {
             <button className="boton-volver" onClick={handleBack}>Volver</button>
             <div className="edit-practica-con">
                 {(() => {
-                    const estudiante = usuarios.find(usuario => usuario.id === practica.estudiante);
-                    const profesor = usuarios.find(usuario => usuario.id === practica.profesor);
-                    const empresa = usuarios.find(usuario => usuario.id === practica.empresa);
-
+                    const estudiante = estudiantes.find(estudiante => estudiante.id === practica.estudiante);
+                    const profesor = profesores.find(profesor => profesor.id === practica.profesor);
+                    const empresa = empresas.find(empresa => empresa.id === practica.empresa);
+    
                     return (
                         <>
                             <h2>Editar Práctica</h2>

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const CrearPractica = ({usuarios}) => {
+const CrearPractica = ({estudiantes, profesores, empresas}) => {
     const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
     const [inputs, setInputs] = useState({});
@@ -24,7 +24,6 @@ const CrearPractica = ({usuarios}) => {
     }
 
 
-    const estudiantes = usuarios.filter((usuario) => usuario.tipo === 'Estudiante')
     const selectEstudiantes = () => {
         let items = [];
         items.push(<option value=''>---</option>)
@@ -34,7 +33,6 @@ const CrearPractica = ({usuarios}) => {
         return items;
     }
 
-    const profesores = usuarios.filter((usuario) => usuario.tipo === 'Profesor')
     const selectProfesores = () => {
         let items = [];
         items.push(<option value=''>---</option>)
@@ -44,7 +42,6 @@ const CrearPractica = ({usuarios}) => {
         return items;
     }
 
-    const empresas = usuarios.filter((usuario) => usuario.tipo === 'Empresa')
     const selectEmpresa = () => {
         let items = [];
         items.push(<option value=''>---</option>)

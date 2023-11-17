@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UsuarioList from "./UsuarioList";
 import Searchbar from "./Searchbar";
 
-const Usuarios = ({usuarioActual, usuarios, setUsuarios}) => {
+const Usuarios = ({usuarioActual, tiposUsuario, usuarios, setUsuarios, estudiantes, profesores, empresas}) => {
     let navigate = useNavigate();
 
     const handleCreate = () => {
@@ -31,9 +31,9 @@ const Usuarios = ({usuarioActual, usuarios, setUsuarios}) => {
         <div className="usuarios">
             <Searchbar keyword={keyword} onChange={updateKeyword}/>
             <div className="boton-crear-usuario">
-                {(usuarioActual.tipo === 'Admin') && <button onClick={() => handleCreate()}>Nuevo Usuario</button>}
+                {(usuarioActual.tipo === 4) && <button onClick={() => handleCreate()}>Nuevo Usuario</button>}
             </div>
-            <UsuarioList usuarios={usuarios.filter((usuario) => usuario.correo.includes(keyword))} handleEdit={handleEdit} handleDelete={handleDelete}/>
+            <UsuarioList usuarios={usuarios.filter((usuario) => usuario.correo.includes(keyword))} tiposUsuario={tiposUsuario} handleEdit={handleEdit} handleDelete={handleDelete} estudiantes={estudiantes} profesores={profesores} empresas={empresas}/>
         </div>
     );
 }

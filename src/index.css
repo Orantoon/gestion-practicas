@@ -214,27 +214,28 @@
 }
 
 /* Agregar Informe a Practica */
-.agregar-informe h2 {
+.agregar-informe-con h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 20px;
   text-align: center;
   padding: 20px;
 }
-.agregar-informe p {
+.agregar-informe-con p {
   margin-left: 20px;
   margin-bottom: 40px;
 }
-.agregar-informe input {
+.agregar-informe-con input {
   margin-left: 20px;
   margin-bottom: 40px;
 }
-.agregar-informe button {
+.agregar-informe-con button {
   margin-left: 20px;
 }
-.agregar-informe {
+.agregar-informe-con {
   display: block;
   margin-bottom: 20px;
+  text-align: center;
   padding: 20px;
 }
 
@@ -279,27 +280,28 @@
 }
 
 /* Agregar Bitacora a Practica */
-.agregar-bitacora h2 {
+.agregar-bitacora-con h2 {
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 20px;
   text-align: center;
   padding: 20px;
 }
-.agregar-bitacora p {
+.agregar-bitacora-con p {
   margin-left: 20px;
   margin-bottom: 40px;
 }
-.agregar-bitacora input {
+.agregar-bitacora-con input {
   margin-left: 20px;
   margin-bottom: 40px;
 }
-.agregar-bitacora button {
+.agregar-bitacora-con button {
   margin-left: 20px;
 }
-.agregar-bitacora {
+.agregar-bitacora-con {
   display: block;
   margin-bottom: 20px;
+  text-align: center;
   padding: 20px;
 }
 
