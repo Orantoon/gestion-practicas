@@ -1,0 +1,35 @@
+@api = http://localhost:4000/comentario-informe
+
+GET {{api}}
+
+###
+
+GET {{api}}/1
+
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "informe": 1,
+    "autor": 1,
+    "contenido": "pruebaapi",
+    "posttime": "2023-01-01T00:00:00.000Z"
+}
+
+###
+
+DELETE {{api}}/10
+
+###
+
+PUT {{api}}/10
+Content-Type: application/json
+
+{
+    "informe": 1,
+    "autor": 1,
+    "contenido": "PRUEBA",
+    "posttime": "2023-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,10 @@
+USE [master]
+GO
+
+ALTER DATABASE [ACS] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+GO
+
+/****** Object:  Database [ACS]    Script Date: 11/17/2023 8:19:12 PM ******/
+DROP DATABASE [ACS]
+GO
+

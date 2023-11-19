@@ -1,0 +1,33 @@
+@api = http://localhost:4000/empresa
+
+GET {{api}}
+
+###
+
+GET {{api}}/11
+
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "id": 21,
+    "nombre": "pruebaapi",
+    "telefono": "12345"
+}
+
+###
+
+DELETE {{api}}/21
+
+###
+
+PUT {{api}}/21
+Content-Type: application/json
+
+{
+    "id": 21,
+    "nombre": "PRUEBA",
+    "telefono": "12345"
+}

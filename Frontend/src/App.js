@@ -21,6 +21,7 @@ import CalificarBitacora from './CalificarBitacora';
 import ComentarBitacora from './ComentarBitacora';
 
 function App() {
+  
   //const [usuarioActualId, setUsuarioActualId] = useState(null);
   //const [usuarioActualId, setUsuarioActualId] = useState(1);
   //const [usuarioActualId, setUsuarioActualId] = useState(2);

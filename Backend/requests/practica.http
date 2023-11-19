@@ -1,0 +1,43 @@
+@api = http://localhost:4000/practica
+
+GET {{api}}
+
+###
+
+GET {{api}}/1
+
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "estudiante": 1,
+    "profesor": 6,
+    "empresa": 11,
+    "calificacionFinal": null,
+    "fechaInicio": "2016-01-01T00:00:00.000Z",
+    "fechaFinal": "2016-01-01T00:00:00.000Z",
+    "estado": "pruebaapi",
+    "nombre": "pruebaapi"
+}
+
+###
+
+DELETE {{api}}/9
+
+###
+
+PUT {{api}}/9
+Content-Type: application/json
+
+{
+    "estudiante": 1,
+    "profesor": 6,
+    "empresa": 11,
+    "calificacionFinal": 100,
+    "fechaInicio": "2016-01-01T00:00:00.000Z",
+    "fechaFinal": "2016-01-01T00:00:00.000Z",
+    "estado": "PRUEBA",
+    "nombre": "PRUEBA"
+}

@@ -1,0 +1,29 @@
+@api = http://localhost:4000/tipo-usuario
+
+GET {{api}}
+
+###
+
+GET {{api}}/1
+
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombre": "pruebaapi"
+}
+
+###
+
+DELETE {{api}}/5
+
+###
+
+PUT {{api}}/5
+Content-Type: application/json
+
+{
+    "nombre": "PRUEBA"
+}

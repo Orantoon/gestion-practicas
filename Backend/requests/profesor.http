@@ -1,0 +1,35 @@
+@api = http://localhost:4000/profesor
+
+GET {{api}}
+
+###
+
+GET {{api}}/6
+
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "id": 21,
+    "nombre": "pruebaapi",
+    "apellido": "pruebaapi",
+    "escuela": "pruebaapi"
+}
+
+###
+
+DELETE {{api}}/21
+
+###
+
+PUT {{api}}/21
+Content-Type: application/json
+
+{
+    "id": 21,
+    "nombre": "PRUEBA",
+    "apellido": "PRUEBA",
+    "escuela": "PRUEBA"
+}

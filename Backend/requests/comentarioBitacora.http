@@ -1,0 +1,35 @@
+@api = http://localhost:4000/comentario-bitacora
+
+GET {{api}}
+
+###
+
+GET {{api}}/1
+
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+    "bitacora": 1,
+    "autor": 1,
+    "contenido": "pruebaapi",
+    "posttime": "2023-01-01T00:00:00.000Z"
+}
+
+###
+
+DELETE {{api}}/6
+
+###
+
+PUT {{api}}/6
+Content-Type: application/json
+
+{
+    "bitacora": 1,
+    "autor": 1,
+    "contenido": "PRUEBA",
+    "posttime": "2023-01-01T00:00:00.000Z"
+}
