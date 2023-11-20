@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { format } from 'date-fns';
 
 const BitacoraList = ({practica, bitacoras, usuarioActual, handleBitacora}) => {
     
@@ -8,11 +9,11 @@ const BitacoraList = ({practica, bitacoras, usuarioActual, handleBitacora}) => {
         navigate('/infobitacora/' + id);
     }
     
-    const bitacorasPractica = bitacoras.filter(bitacora => bitacora.practica === practica.id);
+    const bitacorasPractica = bitacoras && bitacoras.filter(bitacora => bitacora.practica === practica.id);
     const [bitacoraActual, setBitacoraActual] = useState(0);
 
     const mostrarSiguienteBitacora = () => {
-        if (bitacoraActual < bitacoras.length - 1) {
+        if (bitacoraActual < bitacorasPractica.length - 1) {
         setBitacoraActual(bitacoraActual + 1);
         }
     };
@@ -27,13 +28,13 @@ const BitacoraList = ({practica, bitacoras, usuarioActual, handleBitacora}) => {
         <div className="bitacora-list">
             <h2>Bitácoras</h2>
             <div className="bitacora-list-boton">
-                {usuarioActual.tipo === 1 && practica.status === 'activo' && <button onClick={() => handleBitacora(practica.id)}>Agregar Bitácora</button>}
+                {usuarioActual && usuarioActual.tipo === 1 && practica.estado === 'activo' && <button onClick={() => handleBitacora(practica.id)}>Agregar Bitácora</button>}
             </div>
 
-            {bitacorasPractica.length > 0 ? (
+            {bitacorasPractica && bitacorasPractica.length > 0 ? (
             <div className="bitacora-preview" key={bitacorasPractica[bitacoraActual].id}>
                 <h3>{bitacorasPractica[bitacoraActual].titulo}</h3>
-                <p>Fecha de carga: {bitacorasPractica[bitacoraActual].posttime}</p>
+                <p>Fecha de carga: {format(new Date(bitacorasPractica[bitacoraActual].posttime), 'yyyy-MM-dd HH:mm')}</p>
                 <p>
                 Calificación del profesor: {' '}
                 {bitacorasPractica[bitacoraActual].calificacionProfesor !== null

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setLoggedIn }) => {
+const Login = ({ usuarios, setLoggedIn, setUsuarioActualId }) => {
 
     const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
@@ -14,10 +14,23 @@ const Login = ({ setLoggedIn }) => {
 
     let navigate = useNavigate();
     const handleSubmit = (event) => {
-        // VALIDACION
-        
-        setLoggedIn(true);
-        navigate('/');
+        event.preventDefault();
+
+        // VALIDACION CON EL TEC
+
+        // Por el momento es una validacion de existencia de usuario en la base de datos
+
+        const usuarioExistente = usuarios.filter((usuario) => usuario.correo === inputs.correo && usuario.contrasena === inputs.password);
+
+        if (usuarioExistente.length > 0){
+            console.log(usuarioExistente)
+            setLoggedIn(true);
+            //setUsuarioActualId(usuarioExistente.id)
+            navigate('/');
+        } else {
+            console.log(usuarioExistente)
+            alert("El usuario o contraseña es incorrecto, por favor intentelo de nuevo.")
+        }
     }
 
     return (

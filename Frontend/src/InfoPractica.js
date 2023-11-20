@@ -2,12 +2,13 @@ import { useParams } from 'react-router-dom';
 import InformeList from "./InformeList";
 import BitacoraList from "./BitacoraList";
 import { useNavigate } from "react-router-dom";
+import { format } from 'date-fns';
 
 const InfoPractica = ({practicas, informes, bitacoras, usuarioActual, estudiantes, profesores, empresas}) => {
 
     const {id} = useParams();
     const idNum = parseInt(id, 10);
-    const practica = practicas.find(practica => practica.id === idNum);
+    const practica = practicas && practicas.find(practica => practica.id === idNum);
 
     let navigate = useNavigate();
     const handleInforme = (id) => {
@@ -28,23 +29,23 @@ const InfoPractica = ({practicas, informes, bitacoras, usuarioActual, estudiante
             <button className="boton-volver" onClick={handleBack}>Volver</button>
             <div className="info-practica-con">
             {(() => {
-                const estudiante = estudiantes.find(estudiante => estudiante.id === practica.estudiante);
-                const profesor = profesores.find(profesor => profesor.id === practica.profesor);
-                const empresa = empresas.find(empresa => empresa.id === practica.empresa);
+                const estudiante = estudiantes && estudiantes.find(estudiante => estudiante.id === practica.estudiante);
+                const profesor = profesores && profesores.find(profesor => profesor.id === practica.profesor);
+                const empresa = empresas && empresas.find(empresa => empresa.id === practica.empresa);
 
                 return (
                 <>
-                    <h1>{practica.nombre}</h1>
-                    <p>Estudiante: {estudiante ? estudiante.nombre : 'No encontrado'}</p>
-                    <p>Empresa: {empresa ? empresa.nombre : 'No encontrado'}</p>
-                    <p>Profesor encargado: {profesor ? profesor.nombre : 'No encontrado'}</p>
-                    <p>Fecha de inicio: {practica.fechainicio}</p>
-                    <p>Fecha de finalización: {practica.fechafinal}</p>
-                    <p>Stado de la práctica: {practica.status}</p>
-                    {practica.status === 'calificado' && <p>Calificación final: {practica.calificacion}</p>}
+                    {practica && <h1>{practica.nombre}</h1>}
+                    {estudiante && <p>Estudiante: {estudiante ? estudiante.nombre : 'No encontrado'}</p>}
+                    {empresa && <p>Empresa: {empresa ? empresa.nombre : 'No encontrado'}</p>}
+                    {profesor && <p>Profesor encargado: {profesor ? profesor.nombre : 'No encontrado'}</p>}
+                    {practica && <p>Fecha de inicio: {format(new Date(practica.fechaInicio), 'yyyy-MM-dd HH:mm')}</p>}
+                    {practica && <p>Fecha de finalización: {format(new Date(practica.fechaFinal), 'yyyy-MM-dd HH:mm')}</p>}
+                    {practica && <p>Estado de la práctica: {practica.estado}</p>}
+                    {practica && practica.estado === 'calificado' && <p>Calificación final: {practica.calificacion}</p>}
 
-                    <InformeList practica={practica} informes={informes} usuarioActual={usuarioActual} handleInforme={handleInforme} />
-                    <BitacoraList practica={practica} bitacoras={bitacoras} usuarioActual={usuarioActual} handleBitacora={handleBitacora} />
+                    {practica && <InformeList practica={practica} informes={informes} usuarioActual={usuarioActual} handleInforme={handleInforme} />}
+                    {practica && <BitacoraList practica={practica} bitacoras={bitacoras} usuarioActual={usuarioActual} handleBitacora={handleBitacora} />}
                 </>
                 );
             })()}

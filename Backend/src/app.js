@@ -12,7 +12,10 @@ import bitacoraRoutes from './routes/bitacora.routes'
 import comentarioInformeRoutes from './routes/comentarioInforme.routes'
 import comentarioBitacoraRoutes from './routes/comentarioBitacora.routes'
 
-const app = express()
+const app = express();
+const cors = require('cors');
+
+app.use(cors());
 
 // settings
 app.set('port', config.port)

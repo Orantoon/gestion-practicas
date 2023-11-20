@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const CrearPractica = ({estudiantes, profesores, empresas}) => {
+const CrearPractica = ({practicas, setPracticas, estudiantes, profesores, empresas}) => {
     const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
     const [inputs, setInputs] = useState({});
@@ -11,15 +11,47 @@ const CrearPractica = ({estudiantes, profesores, empresas}) => {
         setInputs(values => ({...values, [name]: value}))
     }
 
+    var nuevaPractica = {
+        nombre: inputs.nombre,
+        estudiante: inputs.estudiante,
+        profesor: inputs.profesor,
+        empresa: inputs.empresa,
+        fechaInicio: inputs.inicio,
+        fechaFinal: inputs.final,
+        estado: 'activo',
+        calificacionFinal: null
+    };
+
     let navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        //alert(inputs.nombre);
-        //alert(inputs.estudiante);
-        //alert(inputs.profesor);
-        //alert(inputs.empresa);
-        //alert(inputs.inicio);
-        //alert(inputs.final);
+
+        fetch('http://localhost:4000/practica', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevaPractica),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo crear la práctica');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Práctica creada con éxito', data);
+    
+            if (practicas) {
+                setPracticas([...practicas, data]);
+            } else {
+                setPracticas([data]);
+            }
+        })
+        .catch(error => {
+            console.error('Error al agregar la práctica', error.message);
+        });
+
         navigate('/practicas/');
     }
 
@@ -27,8 +59,8 @@ const CrearPractica = ({estudiantes, profesores, empresas}) => {
     const selectEstudiantes = () => {
         let items = [];
         items.push(<option value=''>---</option>)
-        estudiantes.map((estudiante) => (
-            items.push(<option value={estudiante.correo}>{estudiante.nombre} {estudiante.apellido}: {estudiante.carnet}</option>)
+        estudiantes && estudiantes.map((estudiante) => (
+            items.push(<option value={estudiante.id}>{estudiante.nombre} {estudiante.apellido}: {estudiante.carnet}</option>)
         ))
         return items;
     }
@@ -36,8 +68,8 @@ const CrearPractica = ({estudiantes, profesores, empresas}) => {
     const selectProfesores = () => {
         let items = [];
         items.push(<option value=''>---</option>)
-        profesores.map((profesor) => (
-            items.push(<option value={profesor.correo}>{profesor.nombre} {profesor.apellido}: {profesor.escuela}</option>)
+        profesores && profesores.map((profesor) => (
+            items.push(<option value={profesor.id}>{profesor.nombre} {profesor.apellido}: {profesor.escuela}</option>)
         ))
         return items;
     }
@@ -45,8 +77,8 @@ const CrearPractica = ({estudiantes, profesores, empresas}) => {
     const selectEmpresa = () => {
         let items = [];
         items.push(<option value=''>---</option>)
-        empresas.map((empresa) => (
-            items.push(<option value={empresa.correo}>{empresa.nombre}</option>)
+        empresas && empresas.map((empresa) => (
+            items.push(<option value={empresa.id}>{empresa.nombre}</option>)
         ))
         return items;
     }

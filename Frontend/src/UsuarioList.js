@@ -1,32 +1,41 @@
-const UsuarioList = ({ usuarios, tiposUsuario, handleEdit, handleDelete, estudiantes, profesores, empresas }) => {
+const UsuarioList = ({ usuarios, tipoUsuario, handleEdit, handleDelete, estudiantes, profesores, empresas }) => {
     return (
       <div className="usuario-list">
-        {usuarios.map((usuario) => (
+        {usuarios && usuarios.map((usuario) => {
+          if (!usuario || !estudiantes || !profesores || !empresas) {
+            return (
+              <div className="usuario-preview" key={usuario.id}>
+                <p>Error al cargar el usuario</p>
+              </div>
+            );
+          }
+
+          return (
           <div className="usuario-preview" key={usuario.id}>
-            <h2>{usuario.correo}</h2>
-            <p>Tipo de usuario: {tiposUsuario.find(tipo => tipo.id === usuario.tipo).nombre}</p>
+            {usuario && <h2>{usuario.correo}</h2>}
+            {tipoUsuario && usuario && <p>Tipo de usuario: {tipoUsuario.find(tipo => tipo.id === usuario.tipo).nombre}</p>}
   
-            {estudiantes.find(estudiante => estudiante.id === usuario.id) && (
+            {estudiantes && estudiantes.find(estudiante => estudiante.id === usuario.id) && (
               <div>
-                <p>Nombre: {estudiantes.find(estudiante => estudiante.id === usuario.id).nombre}</p>
-                <p>Apellido: {estudiantes.find(estudiante => estudiante.id === usuario.id).apellido}</p>
-                <p>Carnet: {estudiantes.find(estudiante => estudiante.id === usuario.id).carnet}</p>
-                <p>Carrera: {estudiantes.find(estudiante => estudiante.id === usuario.id).carrera}</p>
+                {estudiantes && usuario && <p>Nombre: {estudiantes.find(estudiante => estudiante.id === usuario.id).nombre}</p>}
+                {estudiantes && usuario && <p>Apellido: {estudiantes.find(estudiante => estudiante.id === usuario.id).apellido}</p>}
+                {estudiantes && usuario && <p>Carnet: {estudiantes.find(estudiante => estudiante.id === usuario.id).carnet}</p>}
+                {estudiantes && usuario && <p>Carrera: {estudiantes.find(estudiante => estudiante.id === usuario.id).carrera}</p>}
               </div>
             )}
   
-            {profesores.find(profesor => profesor.id === usuario.id) && (
+            {profesores && profesores.find(profesor => profesor.id === usuario.id) && (
               <div>
-                <p>Nombre: {profesores.find(profesor => profesor.id === usuario.id).nombre}</p>
-                <p>Apellido: {profesores.find(profesor => profesor.id === usuario.id).apellido}</p>
-                <p>Escuela: {profesores.find(profesor => profesor.id === usuario.id).escuela}</p>
+                {profesores && usuario && <p>Nombre: {profesores.find(profesor => profesor.id === usuario.id).nombre}</p>}
+                {profesores && usuario && <p>Apellido: {profesores.find(profesor => profesor.id === usuario.id).apellido}</p>}
+                {profesores && usuario && <p>Escuela: {profesores.find(profesor => profesor.id === usuario.id).escuela}</p>}
               </div>
             )}
   
-            {empresas.find(empresa => empresa.id === usuario.id) && (
+            {empresas && empresas.find(empresa => empresa.id === usuario.id) && (
               <div>
-                <p>Nombre: {empresas.find(empresa => empresa.id === usuario.id).nombre}</p>
-                <p>Teléfono: {empresas.find(empresa => empresa.id === usuario.id).telefono}</p>
+                {empresas && usuario && <p>Nombre: {empresas.find(empresa => empresa.id === usuario.id).nombre}</p>}
+                {empresas && usuario && <p>Teléfono: {empresas.find(empresa => empresa.id === usuario.id).telefono}</p>}
               </div>
             )}
   
@@ -35,9 +44,10 @@ const UsuarioList = ({ usuarios, tiposUsuario, handleEdit, handleDelete, estudia
               <button onClick={() => handleDelete(usuario.id)}>Borrar</button>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     );
-  };
+};
  
 export default UsuarioList;

@@ -2,26 +2,58 @@ import {useParams} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import {useState} from "react";
 
-const CalificarBitacora = ({practicas}) => {
-    const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
-
+const CalificarBitacora = ({bitacoras, setBitacoras}) => {
     const {id} = useParams();
     const idNum = parseInt(id, 10);
+    const bitacora = bitacoras && bitacoras.find(bitacora => bitacora.id === idNum);
 
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({ calificacion: '' });
     const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        if (!isNaN(value) && value >= 0 && value <= 100) {
-            setInputs(values => ({...values, [name]: value}));
-        }
+        setInputs({ calificacion: event.target.value });
     }
 
     let navigate = useNavigate();
     const handleSubmit = (event) => {
         event.preventDefault();
-        //alert(inputs.calificaion);
-        navigate('/infobitacora/' + id);
+        
+        const calProf = inputs.calificacion;
+
+        var bitacoraActualizada = {
+            titulo: bitacora.titulo || null,
+            contenido: bitacora.contenido || null,
+            practica: bitacora.practica || null,
+            posttime: bitacora.posttime || null,
+            calificacionProfesor: calProf || bitacora.calificacionProfesor
+        };
+
+        fetch(`http://localhost:4000/bitacora/${bitacora.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(bitacoraActualizada),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo actualizar la bitacora');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Bitacora actualizada con éxito', data);
+    
+            setBitacoras(prevInformes => {
+                const bitacorasActualizadas = prevInformes.map(bitacoraAct =>
+                    bitacoraAct.id === bitacora.id ? data : bitacoraAct
+                );
+                return bitacorasActualizadas;
+            });
+
+            navigate('/infobitacora/' + id);
+        })
+        .catch(error => {
+            console.error('Error al actualizar bitacora', error.message);
+        });
     }
 
 

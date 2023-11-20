@@ -20,8 +20,29 @@ const Practicas = ({usuarioActual, usuarios, estudiantes, profesores, empresas, 
     }
 
     const handleDelete = (id) => {
-        const newPracticas = practicas.filter(practica => practica.id !== id)
-        setPracticas(newPracticas)
+        fetch(`http://localhost:4000/practica/${id}`, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo eliminar la práctica');
+            }
+            if (response.status === 204) {
+                return null;
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            const newPracticas = practicas && practicas.filter(practica => practica.id !== id);
+            setPracticas(newPracticas);
+        })
+        .catch(error => {
+            console.error('Error al eliminar la práctica', error);
+        });
     }
 
     // Searchbar
@@ -30,14 +51,14 @@ const Practicas = ({usuarioActual, usuarios, estudiantes, profesores, empresas, 
     const updateKeyword = (keyword) => {
         setKeyword(keyword);
     }
-
+    
     return (
         <div className="practicas">
             <Searchbar keyword={keyword} onChange={updateKeyword}/>
             <div className="boton-crear-practica">
-                {(usuarioActual.tipo === 4) && <button onClick={() => handleCreate()}>Nueva Práctica</button>}
+                {usuarioActual && (usuarioActual.tipo === 4) && <button onClick={() => handleCreate()}>Nueva Práctica</button>}
             </div>
-            <PracticaList usuarioActual={usuarioActual} usuarios={usuarios} estudiantes={estudiantes} profesores={profesores} empresas={empresas} practicas={practicas.filter((practica) => practica.nombre.includes(keyword))} handleView={handleView} handleEdit={handleEdit} handleDelete={handleDelete} />
+            {usuarios && practicas && <PracticaList usuarioActual={usuarioActual} estudiantes={estudiantes} profesores={profesores} empresas={empresas} practicas={practicas.filter((practica) => practica.nombre.includes(keyword))} handleView={handleView} handleEdit={handleEdit} handleDelete={handleDelete} />}
         </div>
     );
 }

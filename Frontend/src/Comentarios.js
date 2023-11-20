@@ -18,22 +18,22 @@ const Comentarios = ({ usuarios, profesores, empresas, comentarios }) => {
     return (
         <div className="comentarios">
           <h2>Comentarios</h2>
-          {comentarios && comentarios.length > 0 && comentarioActual < comentarios.length ? (
+          {comentarios && comentarioActual && comentarios.length > 0 && comentarioActual < comentarios.length ? (
             <div className="comentarios-preview" key={comentarios[comentarioActual].id}>
 
-              {profesores.some(profesor => profesor.id === comentarios[comentarioActual].autor) && (
+              {profesores && profesores.some(profesor => profesor.id === comentarios[comentarioActual].autor) && (
                 <p className="comentarios-autor">
                   Profesor: {profesores.find(profesor => profesor.id === comentarios[comentarioActual].autor)?.nombre || 'Nombre no encontrado'}
                 </p>
               )}
       
-              {empresas.some(empresa => empresa.id === comentarios[comentarioActual].autor) && (
+              {empresas && empresas.some(empresa => empresa.id === comentarios[comentarioActual].autor) && (
                 <p className="comentarios-autor">
                   Empresa: {empresas.find(empresa => empresa.id === comentarios[comentarioActual].autor)?.nombre || 'Nombre no encontrado'}
                 </p>
               )}
       
-              {!profesores.some(profesor => profesor.id === comentarios[comentarioActual].autor) &&
+              {profesores && empresas && !profesores.some(profesor => profesor.id === comentarios[comentarioActual].autor) &&
                !empresas.some(empresa => empresa.id === comentarios[comentarioActual].autor) && (
                 <p className="comentarios-autor">Usuario no encontrado</p>
               )}

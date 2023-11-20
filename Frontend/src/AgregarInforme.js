@@ -2,11 +2,12 @@ import {useParams} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import {useState} from "react";
 
-const AgregarInforme = () => {
+const AgregarInforme = ({practicas, informes, setInformes}) => {
     const BarStyle = {width:"20rem",background:"#F0F0F0", border:"none", padding:"0.5rem"};
 
     const {id} = useParams();
     const idNum = parseInt(id, 10);
+    const practica = practicas && practicas.find(practica => practica.id === idNum);
 
 
     const [inputs, setInputs] = useState({});
@@ -19,6 +20,45 @@ const AgregarInforme = () => {
     let navigate = useNavigate();
     function handleSubmit(event) {
         event.preventDefault();
+
+        const fechaHoraActual = new Date();
+        const formatoFechaHora = fechaHoraActual.toISOString()
+
+        const nuevoInforme = {
+            titulo: inputs.titulo,
+            contenido: inputs.contenido,
+            practica: practica.id,
+            posttime: formatoFechaHora,
+            calificacionProfesor: null,
+            calificacionEmpresa: null,
+            calificacionTotal: null
+        };
+
+        fetch('http://localhost:4000/informe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(nuevoInforme),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo crear el informe');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Informe creado con éxito', data);
+    
+            if (informes) {
+                setInformes([...informes, data]);
+            } else {
+                setInformes([data]);
+            }
+        })
+        .catch(error => {
+            console.error('Error al agregar informe', error.message);
+        });
 
         navigate('/infopractica/' + id);
     }
