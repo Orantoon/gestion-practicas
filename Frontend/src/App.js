@@ -24,9 +24,9 @@ function App() {
   
   //const [usuarioActualId, setUsuarioActualId] = useState(null);
   //const [usuarioActualId, setUsuarioActualId] = useState(1);
-  const [usuarioActualId, setUsuarioActualId] = useState(6);
+  //const [usuarioActualId, setUsuarioActualId] = useState(6);
   //const [usuarioActualId, setUsuarioActualId] = useState(11);
-  //const [usuarioActualId, setUsuarioActualId] = useState(17);
+  const [usuarioActualId, setUsuarioActualId] = useState(17);
 
   const [practicas, setPracticas] = useState(null);
   useEffect(() => {
